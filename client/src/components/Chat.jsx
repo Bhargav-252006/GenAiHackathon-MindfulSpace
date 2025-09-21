@@ -1,7 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
 import axios from 'axios';
 import {mockResponses} from '../data/mockResponses';
-import {getGeminiResponse} from '../utils/ai/geminiService';
 import '../styles/Chat.css';
 
 function Chat() {
@@ -152,21 +151,20 @@ function Chat() {
         setIsTyping(true);
 
         try {
-            // Try to get a response from Google Gemini Pro
-            const geminiApiKey = process.env.REACT_APP_GEMINI_API_KEY;
+            // Try to get a response from server-side Gemini proxy
+            const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
-            console.log('Gemini API Key check:', geminiApiKey ? 'Key exists' : 'No key found');
-            console.log('Key starts with:', geminiApiKey ? geminiApiKey.substring(0, 10) + '...' : 'N/A');
+            console.log('Using API URL:', apiUrl);
+            console.log(`AI Requests used: ${aiRequestCount}/${MAX_AI_REQUESTS_PER_HOUR} this hour`);
 
-            if (geminiApiKey && geminiApiKey !== 'your_gemini_api_key_here') {
+            if (apiUrl) {
                 // Check rate limit before making AI request
                 if (aiRequestCount >= MAX_AI_REQUESTS_PER_HOUR) {
                     setError(`AI request limit reached (${MAX_AI_REQUESTS_PER_HOUR}/hour). Using local responses until next hour.`);
                     throw new Error('Rate limit exceeded');
                 }
 
-                console.log('Attempting to use Gemini API...');
-                console.log(`AI Requests used: ${aiRequestCount}/${MAX_AI_REQUESTS_PER_HOUR} this hour`);
+                console.log('Attempting to use server-side Gemini proxy...');
 
                 try {
                     // Track the AI request
@@ -228,28 +226,46 @@ function Chat() {
                     // Get previous messages for context
                     const chatHistory = messages.slice(-6); // Last 6 messages
 
-                    // Call Gemini API with context
-                    console.log('Calling Gemini API with message:', messageText);
-                    const geminiResponse = await getGeminiResponse(messageText, detectedMood, chatHistory);
-                    console.log('Gemini response received:', geminiResponse);
+                    // Call server-side Gemini proxy
+                    console.log('Calling server Gemini proxy with message:', messageText);
+                    const geminiResponse = await axios.post(`${apiUrl}/api/ai/gemini`, {
+                        message: messageText,
+                        mood: detectedMood,
+                        chatHistory: chatHistory.map(m => ({text: m.text, sender: m.sender}))
+                    }, {
+                        timeout: 30000,
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
 
-                    const botResponse = {
-                        id: Date.now() + 1,
-                        text: geminiResponse,
-                        sender: 'bot',
-                        timestamp: new Date().toISOString(),
-                        source: 'gemini' // Mark the source for potential UI differentiation
-                    };
+                    if (geminiResponse.data.success && geminiResponse.data.data.message) {
+                        console.log('Server Gemini response received:', geminiResponse.data.data);
 
-                    setMessages(prev => [...prev, botResponse]);
-                    return; // Exit early since we got a successful response
+                        const botResponse = {
+                            id: Date.now() + 1,
+                            text: geminiResponse.data.data.message,
+                            sender: 'bot',
+                            timestamp: new Date().toISOString(),
+                            source: 'gemini' // Mark the source for potential UI differentiation
+                        };
+
+                        setMessages(prev => [...prev, botResponse]);
+                        return; // Exit early since we got a successful response
+                    } else {
+                        throw new Error('Invalid response from server');
+                    }
                 } catch (geminiError) {
-                    console.error('Gemini API error:', geminiError);
-                    setError('Gemini API failed, falling back to local responses.');
+                    console.error('Server Gemini proxy error:', geminiError);
+                    if (geminiError.response && geminiError.response.status === 429) {
+                        setError('AI rate limit exceeded. Using local responses until reset.');
+                    } else {
+                        setError('AI service temporarily unavailable, using local responses.');
+                    }
                     // Fall through to backup options
                 }
             } else {
-                console.log('Gemini API key not configured, using fallback');
+                console.log('API URL not configured, using fallback');
             }
 
             // Fallback to backend server if Gemini fails or is not configured

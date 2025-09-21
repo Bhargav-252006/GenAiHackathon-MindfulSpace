@@ -9,6 +9,7 @@ require('dotenv').config();
 const chatRoutes = require('./routes/chat');
 const moodRoutes = require('./routes/mood');
 const resourcesRoutes = require('./routes/resources');
+const aiRoutes = require('./routes/ai');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -55,6 +56,7 @@ const apiPrefix = process.env.API_PREFIX || '/api';
 app.use(`${apiPrefix}/chat`, chatRoutes);
 app.use(`${apiPrefix}/mood`, moodRoutes);
 app.use(`${apiPrefix}/resources`, resourcesRoutes);
+app.use(`${apiPrefix}/ai`, aiRoutes);
 
 // Default API response
 app.get(apiPrefix, (req, res) => {
@@ -64,7 +66,8 @@ app.get(apiPrefix, (req, res) => {
             health: '/health',
             chat: `${apiPrefix}/chat`,
             mood: `${apiPrefix}/mood`,
-            resources: `${apiPrefix}/resources`
+            resources: `${apiPrefix}/resources`,
+            ai: `${apiPrefix}/ai`
         },
         documentation: 'This is a mock API for development and testing purposes only.'
     });
@@ -79,7 +82,8 @@ app.use('*', (req, res) => {
             '/health',
             `${apiPrefix}/chat`,
             `${apiPrefix}/mood`,
-            `${apiPrefix}/resources`
+            `${apiPrefix}/resources`,
+            `${apiPrefix}/ai`
         ]
     });
 });
