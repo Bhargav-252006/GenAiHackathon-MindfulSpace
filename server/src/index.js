@@ -16,10 +16,21 @@ const PORT = process.env.PORT || 5000;
 // Security middleware
 app.use(helmet());
 
-// CORS configuration
+// CORS configuration (dynamic for Render)
+const allowedOrigins = (process.env.ALLOWED_ORIGINS || 'http://localhost:3000,http://127.0.0.1:3000')
+    .split(',')
+    .map(s => s.trim())
+    .filter(Boolean);
+
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://127.0.0.1:3000'],
-    credentials: true
+    origin: function (origin, callback) {
+        // Allow non-browser requests or same-origin
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.includes(origin)) return callback(null, true);
+        return callback(new Error(`Not allowed by CORS: ${origin}`));
+    },
+    credentials: true,
+    optionsSuccessStatus: 200
 }));
 
 // Logging middleware
@@ -90,7 +101,7 @@ app.listen(PORT, () => {
     console.log(`📊 Health check: http://localhost:${PORT}/health`);
     console.log(`🔗 API endpoints: http://localhost:${PORT}${apiPrefix}`);
     console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
-    console.log(`⚡ CORS enabled for: http://localhost:3000`);
+    console.log(`⚡ CORS allowed origins: ${allowedOrigins.join(', ')}`);
 });
 
 module.exports = app;

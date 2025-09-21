@@ -1,4 +1,22 @@
-# Logs
+# Node
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Build outputs
+client/build/
+server/dist/
+
+# Env files (never commit secrets)
+.env
+client/.env
+server/.env
+
+# OS/Editor
+.DS_Store
+Thumbs.db
+.vscode/
+*.swp# Logs
 logs
 *.log
 npm-debug.log*
