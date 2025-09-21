@@ -1,0 +1,59 @@
+{
+    "sad": [
+        "I'm sorry you're feeling down. It's okay to have difficult days. Remember that these feelings are temporary and you're not alone.",
+        "Your feelings are valid, and it's brave of you to share them. What's one small thing that might bring you a little comfort right now?",
+        "Sometimes sadness can feel overwhelming, but you've made it through tough times before. What helped you in the past?",
+        "I hear that you're struggling. Would you like to try a breathing exercise together, or would you prefer to talk about what's on your mind?",
+        "Sadness is a part of being human. It's okay to sit with these feelings for a moment. Is there someone you trust who you could reach out to?",
+        "It sounds like you're carrying a heavy burden right now. Remember that it's okay to ask for help when you need it.",
+        "I can sense the pain in your words. Your feelings matter, and so do you. Have you been taking care of your basic needs today?"
+    ],
+    "anxious": [
+        "Anxiety can feel really overwhelming. Let's try to slow down together. Can you take three deep breaths with me?",
+        "I understand you're feeling anxious. Anxiety often makes things seem bigger than they are. What's one thing you know for certain right now?",
+        "When anxiety hits, it can help to ground yourself. Can you name 5 things you can see around you right now?",
+        "Anxiety is your mind trying to protect you, but sometimes it goes into overdrive. What usually helps you feel more calm?",
+        "Your anxiety is real, but it doesn't define you. You've handled anxious moments before. What strategies have worked for you in the past?",
+        "I notice you're feeling worried. Sometimes it helps to focus on what you can control. What's one small action you could take right now?",
+        "Anxiety can make the future feel scary. Let's focus on this moment together. What are three things you're grateful for today?"
+    ],
+    "angry": [
+        "I can sense your frustration. Anger often comes from feeling unheard or powerless. What's really bothering you?",
+        "It's completely normal to feel angry sometimes. What matters is how we handle it. Do you have a way to release this energy safely?",
+        "Anger can be a sign that something important to you isn't being respected. What boundary or value feels like it's being crossed?",
+        "Your anger is telling you something important. Once you've cooled down a bit, it might help to explore what's underneath it.",
+        "Feeling angry doesn't make you a bad person. It makes you human. What would help you feel more in control right now?",
+        "I hear your frustration. Sometimes anger masks other emotions like hurt or disappointment. What else might you be feeling?",
+        "It sounds like something has really upset you. When you're ready, it might help to think about what you need in this situation."
+    ],
+    "positive": [
+        "I'm so glad to hear you're feeling good! It's wonderful when we can appreciate these positive moments. What's contributing to your good mood?",
+        "That's fantastic! When we're feeling good, it's a great time to think about what we're grateful for. What's bringing you joy today?",
+        "I love hearing that you're doing well! These positive feelings are just as important as the difficult ones. What's been going right for you?",
+        "Your positivity is uplifting! It's great to celebrate the good moments. How can you carry this feeling with you?",
+        "I'm happy you're in a good place right now. These moments remind us that difficult times do pass. What's been the highlight of your day?",
+        "It's wonderful to hear such positivity! What advice would you give to someone who's struggling right now?",
+        "Your good mood is contagious! What are you most looking forward to?"
+    ],
+    "general": [
+        "Thank you for sharing that with me. How are you feeling about everything right now?",
+        "I'm here to listen and support you. What's been on your mind lately?",
+        "It sounds like you have a lot going on. What feels most important to talk about today?",
+        "I appreciate you opening up. Sometimes just talking through things can help. What would be most helpful for you right now?",
+        "Everyone's journey is different, and yours is valid. What kind of support are you looking for today?",
+        "I'm glad you're here. Taking time to check in with yourself is really important. How can I help you today?",
+        "Your thoughts and feelings matter. What's one thing you'd like to focus on in our conversation?",
+        "It takes courage to reach out. What's been the most challenging part of your day or week?",
+        "I hear you. Sometimes it helps just to have someone listen. What else would you like to share?",
+        "Thank you for trusting me with your thoughts. What would make you feel better right now?"
+    ],
+    "encouragement": [
+        "You're stronger than you know, and you're taking positive steps by being here.",
+        "Progress isn't always linear, and that's okay. Every small step counts.",
+        "Remember that healing takes time, and it's okay to go at your own pace.",
+        "You've survived 100% of your difficult days so far. That's a pretty good track record.",
+        "Self-care isn't selfish. Taking care of your mental health is important and necessary.",
+        "You matter, your feelings are valid, and you deserve support and compassion.",
+        "It's okay to not be okay sometimes. What matters is that you're reaching out for help."
+    ]
+}

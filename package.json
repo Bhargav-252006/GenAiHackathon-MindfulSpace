@@ -1,0 +1,41 @@
+{
+    "name": "mindful-space-local",
+    "version": "1.0.0",
+    "description": "MindfulSpace - Local Mental Health App for Development and Testing",
+    "main": "index.js",
+    "scripts": {
+        "start": "concurrently \"npm run server\" \"npm run client\"",
+        "dev": "concurrently \"npm run server:dev\" \"npm run client\"",
+        "client": "cd client && npm start",
+        "server": "cd server && npm start",
+        "server:dev": "cd server && npm run dev",
+        "build": "cd client && npm run build",
+        "install:all": "npm install && cd client && npm install && cd ../server && npm install",
+        "install:client": "cd client && npm install",
+        "install:server": "cd server && npm install",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "clean": "rmdir /s /q client\\build && rmdir /s /q client\\node_modules && rmdir /s /q server\\node_modules && rmdir /s /q node_modules",
+        "reset": "npm run clean && npm run install:all"
+    },
+    "keywords": [
+        "mental-health",
+        "react",
+        "express",
+        "local-development",
+        "mock-api",
+        "wellness"
+    ],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "concurrently": "^7.6.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "local-development-only"
+    },
+    "engines": {
+        "node": ">=14.0.0",
+        "npm": ">=6.0.0"
+    }
+}

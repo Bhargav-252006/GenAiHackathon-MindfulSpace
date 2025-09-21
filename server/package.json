@@ -1,0 +1,29 @@
+{
+    "name": "mindful-space-server",
+    "version": "1.0.0",
+    "description": "MindfulSpace Express Backend",
+    "main": "src/index.js",
+    "scripts": {
+        "start": "node src/index.js",
+        "dev": "nodemon src/index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "dependencies": {
+        "express": "^4.18.2",
+        "cors": "^2.8.5",
+        "morgan": "^1.10.0",
+        "helmet": "^6.0.1",
+        "dotenv": "^16.0.3"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.20"
+    },
+    "keywords": [
+        "mental-health",
+        "express",
+        "api",
+        "mock"
+    ],
+    "author": "",
+    "license": "ISC"
+}
